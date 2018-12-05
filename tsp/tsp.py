@@ -4,7 +4,6 @@
 """
 from math import sqrt
 
-
 """ Class TravelerSalesmanProblem  
     
     A instance of this class recives a path to '.tsp' file and parser this 
@@ -72,7 +71,6 @@ class TravelerSalesmanProblem:
 
             self.__matrix.append(row)  # Fill matrix with rows
 
-
     """ Return number of cities in the tsp
     """
     def size(self):
@@ -89,3 +87,8 @@ class TravelerSalesmanProblem:
     """
     def adjacencymatrix(self):
         return self.__matrix
+
+    """ Return name of the problem 
+    """
+    def name(self):
+        return self.__name

@@ -1,9 +1,31 @@
 from tsp.tsp import TravelerSalesmanProblem
 from tsp.solvers import NearestNeighborSolver
 
-path = 'database/a280.tsp'
+from datetime import datetime
 
-TSP = TravelerSalesmanProblem(path)
+paths = ['database/a280.tsp', 'database/ch130.tsp']
 
-Solver = NearestNeighborSolver(TSP)
-print(Solver.solve())
+
+for path in paths:
+    # Loading the problem
+    TSP = TravelerSalesmanProblem(path)
+
+    # Solving the problem
+    start_time = datetime.now()
+
+    Solver = NearestNeighborSolver(TSP)
+    result = Solver.solve()
+
+    end_time = datetime.now()
+
+    # Report print
+    print('#######################################')
+    print('# Solver Algorithm - Nearest Neighbor #')
+    print('#######################################')
+    print('Problem name:', TSP.name())
+    print('Time:', end_time-start_time)
+    print('Route:')
+    print(result['way'])
+    print('Cost:', result['cost'])
+
+    print('\n')
