@@ -5,8 +5,10 @@
         # class NearestNeighborSolver:
             implementation of the nearest neighbor algorithm
 
-        # class TwoOptSolver:
-            implementation of an improved algorithm
+        # class Improver2Opt:
+            implementation of an improver algorithm. From a List nodes with
+            a defined route, the Improver2Opt static method 'improve()' can
+            minimize costs swapping vertices with 2 Opt algorithm.
 """
 
 from tsp.tsp import TravelerSalesmanProblem
@@ -54,5 +56,41 @@ class NearestNeighborSolver:
         }
 
 
-class TwoOptSolver:
-    pass
+class Improver:
+    @staticmethod
+    def improve2opt(tsp: TravelerSalesmanProblem, route: list, cost: float):
+        matrix = tsp.adjacencymatrix()
+        size = tsp.size()
+
+        # 2-Opt algorithm require minimum 4 vertices
+        if size < 4:
+            return list
+
+        new_route = route.copy()
+        new_total_cost = cost
+
+        for i in range(3, size):
+            a, b, c, d = i - 3, i - 2, i - 1, i
+
+            # Actual route                      # Swap like this:
+            ab_dist = matrix[a][b]              # a b       a - b
+            cd_dist = matrix[c][d]              #  x    =>
+            actual_cost = ab_dist + cd_dist     # c d       c - d
+
+            # Possible new route
+            ad_dist = matrix[a][d]
+            cb_dist = matrix[c][b]
+            new_cost = ad_dist + cb_dist
+
+            # Permutation verification
+            if new_cost < actual_cost:
+                # News costs calc
+                new_total_cost -= actual_cost
+                new_total_cost += new_cost
+                # Swap
+                new_route[a], new_route[b] = new_route[b], new_route[a]
+
+        return {
+            'way': new_route,
+            'cost': new_total_cost
+        }

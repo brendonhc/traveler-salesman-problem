@@ -1,9 +1,10 @@
 from tsp.tsp import TravelerSalesmanProblem
-from tsp.solvers import NearestNeighborSolver
+from tsp.solvers import NearestNeighborSolver, Improver
 
 from datetime import datetime
 
-paths = ['database/a280.tsp', 'database/ch130.tsp']
+paths = ['database/a280.tsp', 'database/ali535.tsp', 'att48.tsp',
+         'att532.tsp', 'berlin52.tsp', 'bier127.tsp']
 
 
 for path in paths:
@@ -11,21 +12,36 @@ for path in paths:
     TSP = TravelerSalesmanProblem(path)
 
     # Solving the problem
-    start_time = datetime.now()
+    solver_start_time = datetime.now()
 
     Solver = NearestNeighborSolver(TSP)
     result = Solver.solve()
 
-    end_time = datetime.now()
+    solver_end_time = datetime.now()
+
+    # Improving the solution
+    improver_start_time = datetime.now()
+
+    improved_result = Improver.improve2opt(TSP, result['way'], result['cost'])
+
+    improver_end_time = datetime.now()
 
     # Report print
     print('#######################################')
     print('# Solver Algorithm - Nearest Neighbor #')
     print('#######################################')
     print('Problem name:', TSP.name())
-    print('Time:', end_time-start_time)
+    print('Time:', solver_end_time-solver_start_time)
     print('Route:')
     print(result['way'])
     print('Cost:', result['cost'])
+
+    print('###############################')
+    print('# Improvere Algorithm - 2-Opt #')
+    print('###############################')
+    print('Time:', improver_end_time-improver_start_time)
+    print('Route:')
+    print(improved_result['way'])
+    print('Cost:', improved_result['cost'])
 
     print('\n')
