@@ -5,8 +5,7 @@
 from math import sqrt
 
 
-"""
-    Class TravelerSalesmanProblem  
+""" Class TravelerSalesmanProblem  
     
     A instance of this class recives a path to '.tsp' file and parser this 
     file generating a array with cities nodes and a adjacency matrix with 
@@ -49,10 +48,10 @@ class TravelerSalesmanProblem:
                     'y': float(row[2])
                 })
 
+            self.__init_adjacency_matrix()  # Create a adjacency matrix
+
     # Matrix used to run graph
     def __init_adjacency_matrix(self):
-        if self.__matrix is not None:
-            return
 
         self.__matrix = []
 
@@ -72,3 +71,21 @@ class TravelerSalesmanProblem:
                 row.append(dist)  # Fill row with distances
 
             self.__matrix.append(row)  # Fill matrix with rows
+
+
+    """ Return number of cities in the tsp
+    """
+    def size(self):
+        return self.__dimension
+
+    """ Return distance between node 'a' to node 'b'
+    
+        'a' and 'b' variables are matrix coordinates
+    """
+    def dist(self, a, b):
+        return self.__matrix[a][b]
+
+    """ Return adjacency matrix
+    """
+    def adjacencymatrix(self):
+        return self.__matrix
