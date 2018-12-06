@@ -21,23 +21,25 @@ class TravelerSalesmanProblem:
         self.__matrix = None
 
         with open(tsp_file_path, 'r') as tsp_file:  # Read tsp file
-            tsp = tsp_file.read().splitlines()
+            tsp = tsp_file.read().split('NODE_COORD_SECTION')
 
-            # First 5 rows
-            self.__header = tsp[:5]
+            self.__header = tsp[0].splitlines()
+            self.__data = tsp[1].splitlines()
 
-            # First tsp row and the Last list element - str
-            self.__name = tsp[0].split().pop().strip()
-
-            # Third tsp row and the Last list element - int
-            self.__dimension = int(tsp[3].split().pop())
-
-            tsp = tsp[6:-1]  # Nodes lines only (without header and EOF)
+            # Find dimension in header
+            # for line in self.__header:
+            #     if line.find('DIMENSION: ') >= 0:
+            #         self.__dimension = int(line.strip().split().pop())
+            #         break
 
             # Coord x and y of each node
             self.__nodes = []
+            self.__dimension = 0
 
-            for line in tsp:
+            for line in self.__data:
+                if len(line) < 6:  # Try ignore blank lines, trash and EOF
+                    continue
+
                 row = line.split()
 
                 # Each node is a dict with this data
@@ -46,6 +48,7 @@ class TravelerSalesmanProblem:
                     'x': float(row[1]),
                     'y': float(row[2])
                 })
+                self.__dimension += 1
 
             self.__init_adjacency_matrix()  # Create a adjacency matrix
 
@@ -59,7 +62,7 @@ class TravelerSalesmanProblem:
 
             row = []
 
-            for adj_id in range(self.__dimension):
+            for adj_id in range(self.size()):
                 adj = self.__nodes[adj_id]
 
                 # Dist between 2 points (2D)
@@ -90,5 +93,5 @@ class TravelerSalesmanProblem:
 
     """ Return name of the problem 
     """
-    def name(self):
-        return self.__name
+    def header(self):
+        return self.__header

@@ -3,8 +3,9 @@ from tsp.solvers import NearestNeighborSolver, Improver
 
 from datetime import datetime
 
-paths = ['database/a280.tsp', 'database/ali535.tsp', 'att48.tsp',
-         'att532.tsp', 'berlin52.tsp', 'bier127.tsp']
+paths = ['database/a280.tsp', 'database/ali535.tsp', 'database/att48.tsp',
+         'database/att532.tsp', 'database/berlin52.tsp',
+         'database/bier127.tsp']
 
 
 for path in paths:
@@ -30,7 +31,7 @@ for path in paths:
     print('#######################################')
     print('# Solver Algorithm - Nearest Neighbor #')
     print('#######################################')
-    print('Problem name:', TSP.name())
+    print('Problem header:', TSP.header())
     print('Time:', solver_end_time-solver_start_time)
     print('Route:')
     print(result['way'])
