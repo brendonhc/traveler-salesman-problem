@@ -29,20 +29,17 @@ for path in paths:
 
     # Report print
     print('#######################################')
+    [print(line) for line in TSP.header()]
+    print('#######################################\n')
     print('# Solver Algorithm - Nearest Neighbor #')
-    print('#######################################')
-    print('Problem header:', TSP.header())
     print('Time:', solver_end_time-solver_start_time)
     print('Route:')
     print(result['way'])
     print('Cost:', result['cost'])
-
-    print('###############################')
+    print()
     print('# Improvere Algorithm - 2-Opt #')
-    print('###############################')
     print('Time:', improver_end_time-improver_start_time)
     print('Route:')
     print(improved_result['way'])
     print('Cost:', improved_result['cost'])
-
     print('\n')
