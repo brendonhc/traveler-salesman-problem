@@ -37,7 +37,7 @@ for path in paths:
     print(result['way'])
     print('Cost:', result['cost'])
     print()
-    print('# Improvere Algorithm - 2-Opt #')
+    print('# Improver Algorithm - 2-Opt #')
     print('Time:', improver_end_time-improver_start_time)
     print('Route:')
     print(improved_result['way'])
