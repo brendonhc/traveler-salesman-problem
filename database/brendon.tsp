@@ -1,0 +1,13 @@
+NAME : Brendon
+COMMENT : A Brendon problem
+TYPE : TSP
+DIMENSION: 6
+EDGE_WEIGHT_TYPE : EUC_2D
+NODE_COORD_SECTION
+  1 10 10
+  2 30 10
+  3 10 30
+  4 30 30
+  5 0 0
+  6 20 40
+EOF

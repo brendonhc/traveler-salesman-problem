@@ -21,16 +21,11 @@ class TravelerSalesmanProblem:
         self.__matrix = None
 
         with open(tsp_file_path, 'r') as tsp_file:  # Read tsp file
+            self.__filename = tsp_file.name
             tsp = tsp_file.read().split('NODE_COORD_SECTION')
 
             self.__header = tsp[0].splitlines()
             self.__data = tsp[1].splitlines()
-
-            # Find dimension in header
-            # for line in self.__header:
-            #     if line.find('DIMENSION: ') >= 0:
-            #         self.__dimension = int(line.strip().split().pop())
-            #         break
 
             # Coord x and y of each node
             self.__nodes = []
@@ -95,3 +90,13 @@ class TravelerSalesmanProblem:
     """
     def header(self):
         return self.__header
+
+    """ Return all graph nodes
+    """
+    def nodes(self):
+        return self.__nodes
+
+    """ Return tsp filename
+    """
+    def filename(self):
+        return self.__filename
